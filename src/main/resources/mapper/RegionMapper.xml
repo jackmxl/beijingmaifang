@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.boot1.mapper.RegionMapper">
+
+	<!-- 开启二级缓存 -->
+	<!--cache type="org.mybatis.caches.ehcache.LoggingEhcache"/ -->
+
+	<resultMap type="com.study.boot1.bean.Region" id="BaseResultMap">
+			<id column="id" property="id" jdbcType="INTEGER"/>
+			<result column="upid" property="upid" jdbcType="INTEGER"/>
+			<result column="name" property="name" jdbcType="VARCHAR"/>
+	</resultMap>
+
+
+	<!-- 通用查询结果列 -->
+	<sql id="Base_Column_List">
+		id,
+		upid,
+		name
+	</sql>
+
+    <select id="getByName"  parameterType="String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"/> 
+         from region where name=#{name}
+	</select>
+	
+	<select id="getRegionListByUpid"  parameterType="Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"/> 
+         from region where upid=#{upid}
+	</select>
+
+    <insert id="insertRegion" parameterType="com.study.boot1.bean.Region" useGeneratedKeys="true" keyProperty="id">
+		insert into region(upid,name) values (#{upid},#{name})
+   </insert>
+
+    
+	<delete id="delectUserByID">
+	  delete from region where id = #{rid}
+	</delete>
+</mapper>

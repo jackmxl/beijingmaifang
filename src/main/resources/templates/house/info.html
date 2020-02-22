@@ -1,0 +1,100 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html>
+<head>
+<title>买房</title>
+<meta name="referrer" content="no-referrer" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/info.css}" >
+</head>
+<body>
+	<header>
+		<div></div>
+	</header>
+	<section
+		style="width: 1180px; height: auto; margin: 0 auto; position: relative; overflow: hidden;">
+		<div style="border: 1px solid #eee;">
+			<div style="margin: 0; padding: 0; outline: 0;">
+				<em style="padding: 10px 0 0 25px; color: #999; float: left;">区县</em>
+				<ul
+					style="padding-left: 35px; padding-top: 10px; height: auto; overflow: hidden;">
+					<li th:style="${t1 == 0} ? 'color:#06babc;text-align: -webkit-match-parent; display: inline-block; padding: 0 35px 20px 0;  cursor: pointer; font-weight: 100;' : 'color:#535353;text-align: -webkit-match-parent; display: inline-block; padding: 0 35px 20px 0;  cursor: pointer; font-weight: 100;' ">
+						<a th:style="${t1 == 0} ? 'color:#06babc;text-decoration: none;  cursor: pointer; font-weight: 100; ' : 'color:#535353;text-decoration: none;  cursor: pointer; font-weight: 100; ' "
+						href="./info0_0_0_1_20"> 全部 </a>
+					</li>
+					<li th:each="r,iterStat : ${r1}"
+						style="text-align: -webkit-match-parent; display: inline-block; padding: 0 35px 20px 0;">
+						<a th:text="${r.name}"
+						th:style="${t1 == r.id} ? 'color:#06babc;text-decoration: none;  cursor: pointer; font-weight: 100;' : 'color:#535353;text-decoration: none;  cursor: pointer; font-weight: 100;' "
+						th:href="@{./info{p1}_0_0_1_20(p1=${r.id})}"> </a>
+					</li>
+				</ul>
+			</div>
+			<div style="margin: 0; padding: 0; outline: 0;" th:if="${r2} ne null">
+				<em style="padding: 10px 0 0 25px; color: #999; float: left;">商圈</em>
+				<ul
+					style="padding-left: 35px; padding-top: 10px; height: auto; overflow: hidden;">
+					<li
+						style="text-align: -webkit-match-parent; display: inline-block; padding: 0 35px 20px 0; color: #535353; cursor: pointer; font-weight: 100;">
+						<a
+						th:style="${t2 == 0} ? 'color:#06babc;text-decoration: none;  cursor: pointer; font-weight: 100; ' : 'color:#535353;text-decoration: none;  cursor: pointer; font-weight: 100; ' "
+						th:href="@{./info{t1}_0_0_1_20(t1=${t1})}"> 全部 </a>
+					</li>
+					<li th:each="r,iterStat : ${r2}"
+						style="text-align: -webkit-match-parent; display: inline-block; padding: 0 35px 20px 0;">
+						<a th:text="${r.name}"
+						th:style="${t2 == r.id} ? 'color:#06babc;text-decoration: none;  cursor: pointer; font-weight: 100;' : 'color:#535353;text-decoration: none;  cursor: pointer; font-weight: 100;' "
+						th:href="@{./info{p1}_{p2}_0_1_20(p1=${t1},p2=${r.id})}"> </a>
+					</li>
+				</ul>
+			</div>
+			<div style="margin: 0; padding: 0; outline: 0;" th:if="${r3} ne null">
+				<em style="padding: 10px 0 0 25px; color: #999; float: left;">小区</em>
+				<ul
+					style="padding-left: 35px; padding-top: 10px; height: auto; overflow: hidden;">
+					<li
+						style="text-align: -webkit-match-parent; display: inline-block; padding: 0 35px 20px 0; color: #535353; cursor: pointer; font-weight: 100;">
+						<a
+						th:style="${t3 == 0} ? 'color:#06babc;text-decoration: none;  cursor: pointer; font-weight: 100; ' : 'color:#535353;text-decoration: none;  cursor: pointer; font-weight: 100; ' "
+						th:href="@{./info{t1}_{t2}_0_1_20(t1=${t1},t2=${t2})}"> 全部 </a>
+					</li>
+					<li th:each="r,iterStat : ${r3}"
+						style="text-align: -webkit-match-parent; display: inline-block; padding: 0 35px 20px 0;">
+						<a th:text="${r.name}"
+						th:style="${t3 == r.id} ? 'color:#06babc;text-decoration: none;  cursor: pointer; font-weight: 100;' : 'color:#535353;text-decoration: none;  cursor: pointer; font-weight: 100;' "
+						th:href="@{./info{p1}_{p2}_{p3}_1_20(p1=${t1},p2=${t2},p3=${r.id})}">
+					</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div>
+				<div th:each="m,s : ${lh}"
+				  style="border-bottom: 1px solid #eee;">
+					<p th:text="${m.closingdate}"><p th:text="${m.name}"></p>
+					<p th:text="${m.closingprice}"></p>
+					<div>
+								<img th:each="mi,mis : ${m.houseimg.split(';')}"
+								 alt="" th:src="${mi}+ke.com"
+									style="height: 200px; max-width: 100%; box-sizing: border-box; display: inline-block;">
+					</div>
+				</div>
+			<div
+				style="text-align: center; margin-top: 10%; padding-bottom: 10%;">
+				<div style="width: 50%; margin-left: 25%;">
+					<div style="width: 200px; float: left;">
+						<a style="text-decoration: none; color: #535353; cursor: pointer; font-weight: 100;"
+							th:href="@{./info{p1}_{p2}_{p3}_{page}_20(p1=${t1},p2=${t2},p3=${t2},page=${pages-1})}"> 上一页 </a>
+					</div>
+					<div style="width: 200px; float: left;">
+						<a
+							style="text-decoration: none; color: #535353; cursor: pointer; font-weight: 100;"
+							th:href="@{./info{p1}_{p2}_{p3}_{page}_20(p1=${t1},p2=${t2},p3=${t2},page=${pages+1})}"> 下一页 </a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+	<footer> </footer>
+
+</body>
+</html>
